@@ -119,7 +119,8 @@ SET_PROP()
 MODEL=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 1)
 REGION=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 2)
 
-if [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/libdrm.so" ]; then
+if [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/libdrm.so" ] ||
+   [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/hw/android.hardware.drm@1.0-impl.so" ]; then
     echo "Target device with 32-Bit HALs detected! Patching..."
 
     IFS=':' read -a TARGET_EXTRA_FIRMWARES <<< "$TARGET_EXTRA_FIRMWARES"
