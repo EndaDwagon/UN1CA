@@ -103,6 +103,7 @@ system/lib64/libhybrid_high_dynamic_range.arcsoft.so
 system/lib64/libae_bracket_hdr.arcsoft.so
 system/lib64/libface_recognition.arcsoft.so
 system/lib64/libmf_bayer_enhance.arcsoft.so
+system/lib64/libDualCamBokehCapture.camera.samsung.so
 "
 for blob in $BLOBS_LIST
 do

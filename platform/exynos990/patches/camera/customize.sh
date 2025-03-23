@@ -103,6 +103,7 @@ system/lib64/libhybrid_high_dynamic_range.arcsoft.so
 system/lib64/libae_bracket_hdr.arcsoft.so
 system/lib64/libface_recognition.arcsoft.so
 system/lib64/libmf_bayer_enhance.arcsoft.so
+system/lib64/libDualCamBokehCapture.camera.samsung.so
 "
 for blob in $BLOBS_LIST
 do
@@ -118,6 +119,8 @@ system/lib64/libMultiFrameProcessing20Tuning.camera.samsung.so
 system/lib64/libMultiFrameProcessing30.camera.samsung.so
 system/lib64/libMultiFrameProcessing30.snapwrapper.camera.samsung.so
 system/lib64/libMultiFrameProcessing30Tuning.camera.samsung.so
+system/lib64/libGeoTrans10.so
+system/lib64/vendor.samsung_slsi.hardware.geoTransService@1.0.so
 system/lib64/libSwIsp_core.camera.samsung.so
 system/lib64/libSwIsp_wrapper_v1.camera.samsung.so
 "
