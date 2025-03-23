@@ -40,8 +40,12 @@ DO_DEBLOAT()
 }
 
 source "$SRC_DIR/unica/debloat.sh"
+
 [ -f "$SRC_DIR/target/$TARGET_CODENAME/debloat.sh" ] \
     && source "$SRC_DIR/target/$TARGET_CODENAME/debloat.sh"
+
+[ -f "$SRC_DIR/platform/$TARGET_PLATFORM/debloat.sh" ] \
+    && source "$SRC_DIR/platform/$TARGET_PLATFORM/debloat.sh"
 # ]
 
 for f in $ODM_DEBLOAT; do
