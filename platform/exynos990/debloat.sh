@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# Debloat list for Galaxy S20 Ultra (z3s)
+# Debloat list for the Exynos 990 platform
 # - Add entries inside the specific partition containing that file (<PARTITION>_DEBLOAT+="")
 # - DO NOT add the partition name at the start of any entry (eg. "/system/dpolicy_system")
 # - DO NOT add a slash at the start of any entry (eg. "/dpolicy_system")
@@ -38,9 +38,4 @@ system/priv-app/PetService
 system/priv-app/SCameraSDKService
 system/priv-app/sec_camerax_service
 system/priv-app/VideoScan
-"
-
-# TODO: Make more space for mediasearch
-SYSTEM_DEBLOAT+="
-system/etc/mediasearch
 "
