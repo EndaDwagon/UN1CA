@@ -143,6 +143,14 @@ system/priv-app/SPPPushClient
 system/priv-app/Upday
 "
 
+# Gallery AI Semantic Search
+SYSTEM_DEBLOAT+="
+system/etc/default-permissions/default-permissions-com.samsung.mediasearch.xml
+system/etc/mediasearch
+system/etc/permissions/privapp-permissions-com.samsung.mediasearch.xml
+system/priv-app/MediaSearch
+"
+
 # eSIM
 if $SOURCE_IS_ESIM_SUPPORTED; then
     if ! $TARGET_IS_ESIM_SUPPORTED; then
