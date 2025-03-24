@@ -82,6 +82,13 @@ if [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/libdrm.so" ] ||
         echo "/$FILE u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
     done <<< "$(find "$WORK_DIR/system/system/lib")"
 
+    # Workaround for libc++ and symlinks
+    echo "/system/lib/libc\+\+\.so u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
+    echo "system/lib/libc.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+    echo "system/lib/libm.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+    echo "system/lib/libdl.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+    echo "system/lib/libdl_android.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+
     # Add 32-Bit Linkers
     echo "Adding linkers..."
     cp -a --preserve=all "$SRC_DIR/unica/patches/desixtification/system/bin/bootstrap/linker" "$WORK_DIR/system/system/bin/bootstrap"
@@ -89,23 +96,20 @@ if [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/libdrm.so" ] ||
     ln -sf "/apex/com.android.runtime/bin/linker" "$WORK_DIR/system/system/bin/linker"
     ln -sf "/apex/com.android.runtime/bin/linker" "$WORK_DIR/system/system/bin/linker_asan"
 
-    if ! grep -q "linker_asan" "$WORK_DIR/configs/file_context-system"; then
-        {
-            echo "/system/bin/linker u:object_r:system_linker_exec:s0"
-            echo "/system/bin/linker_asan u:object_r:system_file:s0"
-            echo "/system/bin/bootstrap/linker u:object_r:system_linker_exec:s0"
-            echo "/system/bin/bootstrap/linker_asan u:object_r:system_file:s0"
+    {
+        echo "/system/bin/linker u:object_r:system_linker_exec:s0"
+        echo "/system/bin/linker_asan u:object_r:system_file:s0"
+        echo "/system/bin/bootstrap/linker u:object_r:system_linker_exec:s0"
+        echo "/system/bin/bootstrap/linker_asan u:object_r:system_file:s0"
 
-        } >> "$WORK_DIR/configs/file_context-system"
-    fi
-    if ! grep -q "linker_asan" "$WORK_DIR/configs/fs_config-system"; then
-        {
-            echo "system/bin/linker 0 0 755 capabilities=0x0"
-            echo "system/bin/linker_asan 0 0 755 capabilities=0x0"
-            echo "system/bin/bootstrap/linker 0 0 755 capabilities=0x0"
-            echo "system/bin/bootstrap/linker_asan 0 0 755 capabilities=0x0"
-        } >> "$WORK_DIR/configs/fs_config-system"
-    fi
+    } >> "$WORK_DIR/configs/file_context-system"
+
+    {
+        echo "system/bin/linker 0 0 755 capabilities=0x0"
+        echo "system/bin/linker_asan 0 0 755 capabilities=0x0"
+        echo "system/bin/bootstrap/linker 0 0 755 capabilities=0x0"
+        echo "system/bin/bootstrap/linker_asan 0 0 755 capabilities=0x0"
+    } >> "$WORK_DIR/configs/fs_config-system"
 
     # Copy APEX files
     cp -a --preserve=all "$SRC_DIR/unica/patches/desixtification/system/apex/"* "$WORK_DIR/system/system/apex/"
