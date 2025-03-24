@@ -22,6 +22,7 @@ unica/flashable-zip/updater binary
 unica/mods/pif/system/bin/rezetprop binary
 unica/mods/wallpaper/** binary
 unica/patches/exynosation/system/** binary
+unica/patches/desixtification/system/** binary
 unica/patches/product_feature/fingerprint/optical_fod/system/** binary
 unica/patches/product_feature/resolution/system/** binary
 unica/patches/vndk/30/** binary
