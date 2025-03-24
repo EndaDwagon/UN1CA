@@ -136,6 +136,10 @@ done
 if ! grep -q "libeden_wrapper_system" "$WORK_DIR/configs/file_context-system"; then
     {
         echo "/system/lib64/libc++_shared\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/libsuperresolution\.arcsoft\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/libsuperresolution_raw\.arcsoft\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/libsuperresolution_wrapper_v2\.camera\.samsung\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/libsuperresolutionraw_wrapper_v2\.camera\.samsung\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libeden_wrapper_system\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/vendor\.samsung\.hardware\.snap-V2-ndk\.so u:object_r:system_lib_file:s0"
 
@@ -144,6 +148,10 @@ fi
 if ! grep -q "libeden_wrapper_system" "$WORK_DIR/configs/fs_config-system"; then
     {
         echo "system/lib64/libc++_shared.so 0 0 644 capabilities=0x0"
+        echo "system/lib64/libsuperresolution.arcsoft.so 0 0 644 capabilities=0x0"
+        echo "system/lib64/libsuperresolutionraw.arcsoft.so 0 0 644 capabilities=0x0"
+        echo "system/lib64/libsuperresolution_wrapper_v2.camera.samsung.so 0 0 644 capabilities=0x0"
+        echo "system/lib64/libsuperresolutionraw_wrapper_v2.camera.samsung.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libeden_wrapper_system.so 0 0 644 capabilities=0x0"
         echo "system/lib64/vendor.samsung.hardware.snap-V2-ndk.so 0 0 644 capabilities=0x0"
     } >> "$WORK_DIR/configs/fs_config-system"
