@@ -63,7 +63,7 @@ REGION=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 2)
 
 # Set build ID
 VALUE="$(GET_PROP "ro.build.display.id" "$WORK_DIR/system/system/build.prop")" 
-SET_PROP "ro.build.display.id" "ExtremeROM Nexus-$TARGET_CODENAME ($VALUE)" "$WORK_DIR/system/system/build.prop"
+SET_PROP "ro.build.display.id" "ExtremeROM Nexus - $TARGET_CODENAME ($VALUE)" "$WORK_DIR/system/system/build.prop"
 
 # Fix portrait mode
 if [[ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib64/libDualCamBokehCapture.camera.samsung.so" ]]; then
