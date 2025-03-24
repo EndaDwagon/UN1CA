@@ -136,11 +136,13 @@ patchelf --add-needed "libc++_shared.so" "$WORK_DIR/system/system/lib64/libMulti
 if ! grep -q "libeden_wrapper_system" "$WORK_DIR/configs/file_context-system"; then
     {
         echo "/system/lib64/libc\+\+_shared\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/libeden_wrapper_system\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/libhigh_dynamic_range\.arcsoft\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/liblow_light_hdr\.arcsoft\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libsuperresolution\.arcsoft\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libsuperresolution_raw\.arcsoft\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libsuperresolution_wrapper_v2\.camera\.samsung\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libsuperresolutionraw_wrapper_v2\.camera\.samsung\.so u:object_r:system_lib_file:s0"
-        echo "/system/lib64/libeden_wrapper_system\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libtensorflowLite\.camera\.samsung\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libtensorflowlite_c\.camera\.samsung\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libtensorflowlite_inference_api\.camera\.samsung\.so u:object_r:system_lib_file:s0"
@@ -154,11 +156,13 @@ fi
 if ! grep -q "libeden_wrapper_system" "$WORK_DIR/configs/fs_config-system"; then
     {
         echo "system/lib64/libc++_shared.so 0 0 644 capabilities=0x0"
+        echo "system/lib64/libeden_wrapper_system.so 0 0 644 capabilities=0x0"
+        echo "system/lib64/libhigh_dynamic_range.arcsoft.so 0 0 644 capabilities=0x0"
+        echo "system/lib64/liblow_light_hdr.arcsoft.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libsuperresolution.arcsoft.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libsuperresolution_raw.arcsoft.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libsuperresolution_wrapper_v2.camera.samsung.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libsuperresolutionraw_wrapper_v2.camera.samsung.so 0 0 644 capabilities=0x0"
-        echo "system/lib64/libeden_wrapper_system.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libtensorflowLite.camera.samsung.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libtensorflowlite_c.camera.samsung.so 0 0 644 capabilities=0x0"
         echo "system/lib64/libtensorflowlite_inference_api.camera.samsung.so 0 0 644 capabilities=0x0"
