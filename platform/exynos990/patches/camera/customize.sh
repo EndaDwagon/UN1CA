@@ -125,13 +125,13 @@ system/lib64/libSwIsp_core.camera.samsung.so
 system/lib64/libSwIsp_wrapper_v1.camera.samsung.so
 "
 
-# Add libc++_shared.so dependency for __cxa_demangle symbol
-patchelf --add-needed "libc++_shared.so" "$WORK_DIR/system/system/lib64/libMultiFrameProcessing20Core.camera.samsung.so"
-
 for blob in $BLOBS_LIST
 do
     ADD_TO_WORK_DIR "system" "$blob" 0 0 644 "u:object_r:system_lib_file:s0"
 done
+
+# Add libc++_shared.so dependency for __cxa_demangle symbol
+patchelf --add-needed "libc++_shared.so" "$WORK_DIR/system/system/lib64/libMultiFrameProcessing20Core.camera.samsung.so"
 
 if ! grep -q "libeden_wrapper_system" "$WORK_DIR/configs/file_context-system"; then
     {
