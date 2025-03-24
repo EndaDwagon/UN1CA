@@ -61,7 +61,7 @@ SEC_FLOATING_FEATURE_CAMERA_CONFIG_MEMORY_USAGE_LEVEL=3
 SEC_FLOATING_FEATURE_CAMERA_CONFIG_PERSONALIZATION=CoolOriWarm
 SEC_FLOATING_FEATURE_CAMERA_CONFIG_SDK_FEATURE_INFO=version2,super_night,preview_dis,video_hdr,smooth_zoom,logical_rear_camera:camera_id=0,exposure_table_control,selfie_tone,physical_camera_tele:camera_id=-1,super_night_exposure
 SEC_FLOATING_FEATURE_CAMERA_CONFIG_UW_DISTORTION_CORRECTION=0,109,2,19010101,0,0,0,0,48,0
-SEC_FLOATING_FEATURE_CAMERA_CONFIG_VENDOR_LIB_INFO=beauty.samsung.v4,food.samsung.v1,mfhdr.arcsoft.v4,image_enhance.arcsoft.v1,llhdr.arcsoft.v4,dual_bokeh.samsung.v1_1,super_night.mpi.v2,super_resolution.arcsoft.v2_1,scene_detection.samsung.v1,face_landmark.arcsoft.v2_1,facial_attribute.samsung.v1,smart_scan.samsung.v2,single_bokeh.samsung.v2,high_res.arcsoft.v1,selfie_correction.samsung.v1,event_detection.samsung.v2,swuwdc.arcsoft.v1,facial_restoration.arcsoft.v1,human_tracking_hand.arcsoft.v4,fr_tracking.arcsoft.v1,localtm.samsung.v1_1
+SEC_FLOATING_FEATURE_CAMERA_CONFIG_VENDOR_LIB_INFO=beauty.samsung.v4,food.samsung.v1,mfhdr.arcsoft.v4,image_enhance.arcsoft.v1,llhdr.arcsoft.v4,dual_bokeh.samsung.v1_1,super_night.mpi.v2,super_resolution.arcsoft.v2_1,scene_detection.samsung.v1,face_landmark.arcsoft.v2_1,facial_attribute.samsung.v1,smart_scan.samsung.v2,single_bokeh.samsung.v2,high_res.arcsoft.v1,selfie_correction.samsung.v1,event_detection.samsung.v2,swuwdc.arcsoft.v1,facial_restoration.arcsoft.v1,human_tracking_hand.arcsoft.v4,fr_tracking.arcsoft.v1,localtm.samsung.v1_1,image_codec.samsung.v1
 SEC_FLOATING_FEATURE_CAMERA_CONFIG_WIDE_DISTORTION_CORRECTION=0,0,0,0,0,0,0,0,0,0
 SEC_FLOATING_FEATURE_CAMERA_SUPPORT_30FPS_ALL_PORTRAITVIDEO=
 SEC_FLOATING_FEATURE_CAMERA_SUPPORT_4K_PORTRAITVIDEO=
