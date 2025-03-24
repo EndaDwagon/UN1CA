@@ -41,8 +41,9 @@ fi
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/saiv"
 cp -a --preserve=all "$FW_DIR/$TARGET_FIRMWARE_PATH/system/system/saiv" "$WORK_DIR/system/system/saiv"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/saiv/textrecognition"
-cp -a --preserve=all "$FW_DIR/$SOURCE_FIRMWARE_PATH/system/system/saiv/textrecognition" \
-    "$WORK_DIR/system/system/saiv/textrecognition"
+cp -a --preserve=all "$FW_DIR/$SOURCE_FIRMWARE_PATH/system/system/saiv/textrecognition" "$WORK_DIR/system/system/saiv/textrecognition"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/saiv/face"
+cp -a --preserve=all "$FW_DIR/$SOURCE_FIRMWARE_PATH/system/system/saiv/face" "$WORK_DIR/system/system/saiv/face"
 while read -r i; do
     FILE="$(echo -n "$i"| sed "s.$WORK_DIR/system/..")"
     [ -d "$i" ] && echo "$FILE 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
