@@ -79,11 +79,11 @@ if [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/libdrm.so" ] ||
         [ -d "$i" ] && echo "$FILE 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
         [ -f "$i" ] && echo "$FILE 0 0 644 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
         FILE="$(echo -n "$FILE" | sed 's/\./\\./g')"
-        echo "/$FILE u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
+        echo "/$FILE u:object_r:system_lib_file:s0" >> "$WORK_DIR/configs/file_context-system"
     done <<< "$(find "$WORK_DIR/system/system/lib")"
 
     # Workaround for libc++ and symlinks
-    echo "/system/lib/libc\+\+\.so u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
+    echo "/system/lib/libc\+\+\.so u:object_r:system_lib_file:s0" >> "$WORK_DIR/configs/file_context-system"
     echo "system/lib/libc.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
     echo "system/lib/libm.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
     echo "system/lib/libdl.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
