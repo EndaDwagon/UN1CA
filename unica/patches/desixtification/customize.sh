@@ -1,62 +1,6 @@
 SKIPUNZIP=1
 
 # [
-ADD_TO_WORK_DIR()
-{
-    local PARTITION="$1"
-    local FILE_PATH="$2"
-    local TMP
-
-    case "$PARTITION" in
-        "system_ext")
-            if $TARGET_HAS_SYSTEM_EXT; then
-                FILE_PATH="system_ext/$FILE_PATH"
-            else
-                PARTITION="system"
-                FILE_PATH="system/system/system_ext/$FILE_PATH"
-            fi
-        ;;
-        *)
-            FILE_PATH="$PARTITION/$FILE_PATH"
-            ;;
-    esac
-
-    mkdir -p "$WORK_DIR/$(dirname "$FILE_PATH")"
-    cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/$FILE_PATH" "$WORK_DIR/$FILE_PATH"
-
-    TMP="$FILE_PATH"
-    [[ "$PARTITION" == "system" ]] && TMP="$(echo "$TMP" | sed 's.^system/system/.system/.')"
-    while [[ "$TMP" != "." ]]
-    do
-        if ! grep -q "$TMP " "$WORK_DIR/configs/fs_config-$PARTITION"; then
-            if [[ "$TMP" == "$FILE_PATH" ]]; then
-                echo "$TMP $3 $4 $5 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-$PARTITION"
-            elif [[ "$PARTITION" == "vendor" ]]; then
-                echo "$TMP 0 2000 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-$PARTITION"
-            else
-                echo "$TMP 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-$PARTITION"
-            fi
-        else
-            break
-        fi
-
-        TMP="$(dirname "$TMP")"
-    done
-
-    TMP="$(echo "$FILE_PATH" | sed 's/\./\\\./g')"
-    [[ "$PARTITION" == "system" ]] && TMP="$(echo "$TMP" | sed 's.^system/system/.system/.')"
-    while [[ "$TMP" != "." ]]
-    do
-        if ! grep -q "/$TMP " "$WORK_DIR/configs/file_context-$PARTITION"; then
-            echo "/$TMP $6" >> "$WORK_DIR/configs/file_context-$PARTITION"
-        else
-            break
-        fi
-
-        TMP="$(dirname "$TMP")"
-    done
-}
-
 REMOVE_FROM_WORK_DIR()
 {
     local FILE_PATH="$1"
@@ -123,43 +67,48 @@ if [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/libdrm.so" ] ||
    [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/hw/android.hardware.drm@1.0-impl.so" ]; then
     echo "Target device with 32-Bit HALs detected! Patching..."
 
-    IFS=':' read -a TARGET_EXTRA_FIRMWARES <<< "$TARGET_EXTRA_FIRMWARES"
-    MODEL=$(echo -n "${TARGET_EXTRA_FIRMWARES[0]}" | cut -d "/" -f 1)
-    REGION=$(echo -n "${TARGET_EXTRA_FIRMWARES[0]}" | cut -d "/" -f 2)
-
     # Add lib32 folder
     echo "system/lib 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
     echo "system/lib u:object_r:system_lib_file:s0" >> "$WORK_DIR/configs/file_context-system"
 
-    echo "Copying all 32-bit libraries"
-    cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/system/system/lib/"* "$WORK_DIR/system/system/lib"
-    cat "$FW_DIR/${MODEL}_${REGION}/fs_config-system" | grep -F "system/lib/" >> "$WORK_DIR/configs/fs_config-system"
-    cat "$FW_DIR/${MODEL}_${REGION}/file_context-system" | grep -F "system/lib/" >> "$WORK_DIR/configs/file_context-system"
+    echo "Copying 32-bit libraries"
+    cp -a --preserve=all "$SRC_DIR/unica/patches/desixtification/system/lib/"* "$WORK_DIR/system/system/lib/"
+
+    while read -r i; do
+        FILE="$(echo -n "$i"| sed "s.$WORK_DIR/system/..")"
+        [ -d "$i" ] && echo "$FILE 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+        [ -f "$i" ] && echo "$FILE 0 0 644 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+        FILE="$(echo -n "$FILE" | sed 's/\./\\./g')"
+        echo "/$FILE u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
+    done <<< "$(find "$WORK_DIR/system/system/lib")"
 
     # Add 32-Bit Linkers
     echo "Adding linkers..."
-    ADD_TO_WORK_DIR "system" "system/bin/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
-    ADD_TO_WORK_DIR "system" "system/bin/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
-    ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
-    ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
+    cp -a --preserve=all "$SRC_DIR/unica/patches/desixtification/system/bin/bootstrap/linker" "$WORK_DIR/system/system/bin/bootstrap"
+    ln -sf "linker" "$WORK_DIR/system/system/bin/bootstrap/linker_asan"
+    ln -sf "/apex/com.android.runtime/bin/linker" "$WORK_DIR/system/system/bin/linker"
+    ln -sf "/apex/com.android.runtime/bin/linker" "$WORK_DIR/system/system/bin/linker_asan"
 
-    # Add AOSP Runtime APEX
-    cp -a --preserve=all "$SRC_DIR/unica/patches/desixtification/system/apex/com.android.runtime.apex" "$WORK_DIR/system/system/apex"
+    if ! grep -q "linker_asan" "$WORK_DIR/configs/file_context-system"; then
+        {
+            echo "/system/bin/linker u:object_r:system_linker_exec:s0"
+            echo "/system/bin/linker_asan u:object_r:system_file:s0"
+            echo "/system/bin/bootstrap/linker u:object_r:system_linker_exec:s0"
+            echo "/system/bin/bootstrap/linker_asan u:object_r:system_file:s0"
 
-    # Add i18n APEX
-    ADD_TO_WORK_DIR "system" "system/apex/com.android.i18n.apex" 0 0 644 "u:object_r:system_file:s0"
+        } >> "$WORK_DIR/configs/file_context-system"
+    fi
+    if ! grep -q "linker_asan" "$WORK_DIR/configs/fs_config-system"; then
+        {
+            echo "system/bin/linker 0 0 755 capabilities=0x0"
+            echo "system/bin/linker_asan 0 0 755 capabilities=0x0"
+            echo "system/bin/bootstrap/linker 0 0 755 capabilities=0x0"
+            echo "system/bin/bootstrap/linker_asan 0 0 755 capabilities=0x0"
+        } >> "$WORK_DIR/configs/fs_config-system"
+    fi
 
-    # Add tzdata5 APEX as OneUI 6 i18n APEX uses it
-    REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/apex/com.google.android.tzdata6.apex"
-    ADD_TO_WORK_DIR "system" "system/apex/com.google.android.tzdata5.apex" 0 0 644 "u:object_r:system_file:s0"
-
-    # Add missing camera blobs
-    ADD_TO_WORK_DIR "system" "system/lib64/libtensorflowLite.camera.samsung.so" 0 0 644 "u:object_r:system_lib_file:s0"
-    ADD_TO_WORK_DIR "system" "system/lib64/libtensorflowlite_c.camera.samsung.so" 0 0 644 "u:object_r:system_lib_file:s0"
-    ADD_TO_WORK_DIR "system" "system/lib64/libtensorflowlite_c.spenocr.samsung.so" 0 0 644 "u:object_r:system_lib_file:s0"
-    ADD_TO_WORK_DIR "system" "system/lib64/libtensorflowlite_inference_api.camera.samsung.so" 0 0 644 "u:object_r:system_lib_file:s0"
-    ADD_TO_WORK_DIR "system" "system/lib64/libtensorflowLite2_11_0_dynamic_camera.so" 0 0 644 "u:object_r:system_lib_file:s0"
-    ADD_TO_WORK_DIR "system" "system/lib64/libsaiv_HprFace_cmh_support_jni.camera.samsung.so" 0 0 644 "u:object_r:system_lib_file:s0"
+    # Copy APEX files
+    cp -a --preserve=all "$SRC_DIR/unica/patches/desixtification/system/apex/"* "$WORK_DIR/system/system/apex/"
 
     # Set props
     echo "Setting props..."
