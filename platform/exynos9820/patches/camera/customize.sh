@@ -134,7 +134,7 @@ if ! grep -q "libeden_wrapper_system" "$WORK_DIR/configs/file_context-system"; t
         echo "/system/lib64/libtensorflowlite_c\.camera\.samsung\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libtensorflowlite_inference_api\.camera\.samsung\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libtensorflowlite_jni_voicecommand\.camera\.samsung\.so u:object_r:system_lib_file:s0"
-        echo "/system/lib64/libtensorflowLite2_11_0_dynamic_camera\.camera\.samsung\.so u:object_r:system_lib_file:s0"
+        echo "/system/lib64/libtensorflowLite2_11_0_dynamic_camera\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/libsaiv_HprFace_cmh_support_jni\.camera\.samsung\.so u:object_r:system_lib_file:s0"
         echo "/system/lib64/vendor\.samsung\.hardware\.snap-V2-ndk\.so u:object_r:system_lib_file:s0"
 
