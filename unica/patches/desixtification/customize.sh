@@ -84,10 +84,10 @@ if [ -f "$FW_DIR/${MODEL}_${REGION}/vendor/lib/libdrm.so" ] ||
 
     # Workaround for libc++ and symlinks
     echo "/system/lib/libc\+\+\.so u:object_r:system_lib_file:s0" >> "$WORK_DIR/configs/file_context-system"
-    echo "system/lib/libc.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
-    echo "system/lib/libm.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
-    echo "system/lib/libdl.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
-    echo "system/lib/libdl_android.so 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+    echo "system/lib/libc.so 0 0 644 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+    echo "system/lib/libm.so 0 0 644 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+    echo "system/lib/libdl.so 0 0 644 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+    echo "system/lib/libdl_android.so 0 0 644 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
 
     # Add 32-Bit Linkers
     echo "Adding linkers..."
