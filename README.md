@@ -17,6 +17,8 @@
   <a href="https://t.me/unicarom">💬 Telegram</a>
 </p>
 
+This is a fork from ExtremeXT's repo before he sadly deleted his repository. This will not be maintained although it is identical to his repository before he deleted it.
+
 # What is UN1CA?
 UN1CA is a work-in-progress custom firmware for Samsung Galaxy devices. It's based on the latest and greatest iteration of Samsung's UX and it also includes additional features and tweaks to ensure the best possible experience out of the box.
 Its build system allows to automatically download/extract the firmware, apply the required patches and generates a flashable zip/tar package for the specified device.
