@@ -495,7 +495,7 @@ GENERATE_BUILD_INFO()
     true
 }
 
-FILE_NAME="UN1CA_${ROM_VERSION}_$(date +%Y%m%d)_${TARGET_CODENAME}"
+FILE_NAME="UN1CA_OLD_ExtremeXT_${ROM_VERSION}_$(date +%Y%m%d_${TARGET_CODENAME}"
 CERT_NAME="aosp_testkey"
 $ROM_IS_OFFICIAL && [ -f "$SRC_DIR/unica/security/unica_ota.pk8" ] && CERT_NAME="unica_ota"
 # ]
