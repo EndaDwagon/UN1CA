@@ -17,7 +17,7 @@
   <a href="https://t.me/unicarom">💬 Telegram</a>
 </p>
 
-This is a fork from ExtremeXT's repo before he sadly deleted his repository. This will not be maintained although it is identical to his repository before he deleted it.
+This is a fork from ExtremeXT's repository before he sadly deleted it. This will be maintained for the Exynos 2200 platform starting from the 16th April 2025 so it is NOT identical to how it was originally.
 
 # What is UN1CA?
 UN1CA is a work-in-progress custom firmware for Samsung Galaxy devices. It's based on the latest and greatest iteration of Samsung's UX and it also includes additional features and tweaks to ensure the best possible experience out of the box.
@@ -26,7 +26,7 @@ Its build system allows to automatically download/extract the firmware, apply th
 Any form of contribution, suggestions, bug report or feature request for the project will be welcome.
 
 # Features
-- Based on the latest stable Galaxy S23 firmware
+- Based on the latest stable Galaxy S25 Ultra firmware
 - Galaxy AI support
 - High end animations
 - Native/live blur support
@@ -38,12 +38,8 @@ Any form of contribution, suggestions, bug report or feature request for the pro
 - Object, shadow and reflection eraser support
 - Image clipper support
 - Smart Suggestions widget
-- Multi user support
 - Samsung DeX support
-- Camera privacy toggle support
 - Debloated from useless system services/additional apps
-- Integrated OTA updates app
-- Play Integrity Fix included
 - [BluetoothLibraryPatcher](https://github.com/3arthur6/BluetoothLibraryPatcher) included
 - [FrameworkPatch](https://github.com/chiteroman/FrameworkPatch) implemented in system frameworks
 - [KnoxPatch](https://github.com/salvogiangri/KnoxPatch) implemented in system frameworks
