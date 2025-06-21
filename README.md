@@ -17,8 +17,6 @@
   <a href="https://t.me/unicarom">💬 Telegram</a>
 </p>
 
-This is a fork from ExtremeXT's repository before he sadly deleted it. This will be maintained for the Exynos 2200 platform starting from the 16th April 2025 so it is NOT identical to how it was originally.
-
 # What is UN1CA?
 UN1CA is a work-in-progress custom firmware for Samsung Galaxy devices. It's based on the latest and greatest iteration of Samsung's UX and it also includes additional features and tweaks to ensure the best possible experience out of the box.
 Its build system allows to automatically download/extract the firmware, apply the required patches and generates a flashable zip/tar package for the specified device.
@@ -60,6 +58,7 @@ This project is licensed under the terms of the [GNU General Public License v3.0
 
 # Credits
 A big thanks goes to the following for their invaluable contributions in no particular order:
+- **[ExtremeXT](https://github.com/ExtremeXT)** for literally making this whole thing, this repo is just a public archive of his original mods
 - **[ShaDisNX255](https://github.com/ShaDisNX255)** for his help, time and for his [NcX ROM](https://github.com/ShaDisNX255/NcX_Stock) which inspired this project
 - **[DavidArsene](https://github.com/DavidArsene)** for his help and time
 - **[paulowesll](https://github.com/paulowesll)** for his help and support
